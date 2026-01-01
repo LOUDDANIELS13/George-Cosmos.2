@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dan's AI - Voice & Pitch Technology | Worth £1M+</title>
+    <style>
+        :root {
+            --neon-purple: #9d4edd;
+            --deep-space: #0c0f1d;
+            --electric-blue: #4cc9f0;
+            --matrix-green: #00ff41;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+        
+        body {
+            background: var(--deep-space);
+            color: white;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(157, 78, 221, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(76, 201, 240, 0.15) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        header {
+            padding: 2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--neon-purple), var(--electric-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -1px;
+        }
+        
+        .tagline {
+            font-size: 1rem;
+            opacity: 0.8;
+            margin-top: 0.5rem;
+        }
+        
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        nav a:hover {
+            color: var(--electric-blue);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--electric-blue);
+            transition: width 0.3s ease;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .hero {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            position: relative;
+        }
+        
+        .hero-content {
+            max-width: 600px;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, white, var(--matrix-green));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, var(--neon-purple), var(--electric-blue));
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            box-shadow: 0 10px 20px rgba(76, 201, 240, 0.3);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(76, 201, 240, 0.4);
+        }
+        
+        .hero-image {
+            position: absolute;
+            right: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40%;
+            height: 80%;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+        
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .hero-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .features {
+            padding: 8rem 5%;
+            background: rgba(255,255,255,0.02);
+            backdrop-filter: blur(10px);
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 5rem;
+            background: linear-gradient(45deg, var(--electric-blue), var(--matrix-green));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+        
+        .feature-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255,255,255,0.1);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, var(--neon-purple), var(--electric-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-desc {
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+        
+        .demo-section {
+            padding: 8rem 5%;
+            text-align: center;
+        }
+        
+        .demo-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.05);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .audio-visualizer {
+            width: 100%;
+            height: 200px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .visualizer-bars {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: flex-end;
+            gap: 2px;
+            padding: 0 10px;
+        }
+        
+        .visualizer-bar {
+            flex: 1;
+            background: var(--electric-blue);
+            border-radius: 2px 2px 0 0;
+            transition: height 0.1s ease;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+        
+        .control-button {
+            padding: 0.8rem 1.5rem;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .control-button:hover {
+            background: rgba(76, 201, 240, 0.3);
+        }
+        
+        .slider-container {
+            margin: 2rem 0;
+            text-align: left;
+        }
+        
+        .slider-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            opacity: 0.8;
+        }
+        
+        .slider {
+            width: 100%;
+            height: 5px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 5px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+        
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: var(--electric-blue);
+            cursor: pointer;
+        }
+        
+        footer {
+            padding: 3rem 5%;
+            background: rgba(0,0,0,0.3);
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .footer-logo {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .copyright {
+            opacity: 0.6;
+            font-size: 0.9rem;
+            margin-top: 2rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 1.5rem 0;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background: rgba(76, 201, 240, 0.3);
+            transform: translateY(-3px);
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                padding-top: 5rem;
+                text-align: center;
+            }
+            
+            .hero-content {
+                max-width: 100%;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-image {
+                position: relative;
+                width: 100%;
+                height: 300px;
+                margin-top: 3rem;
+                right: auto;
+                transform: none;
+            }
+            
+            nav ul {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div>
+            <div class="logo">Dan's AI</div>
+            <div class="tagline">Voice cloning & pitch shifting technology</div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#demo">Demo</a></li>
+                <li><a href="#">Pricing</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Transform Voices Like Never Before</h1>
+            <p>Dan's AI revolutionizes audio processing with cutting-edge voice cloning and pitch modification technology. Experience studio-quality transformations in real-time, powered by our proprietary neural networks.</p>
+            <a href="#demo" class="cta-button">Try Free Demo</a>
+        </div>
+        <div class="hero-image">
+            <img src="https://source.unsplash.com/random/800x600/?voice,recording,studio" alt="Voice recording studio">
+        </div>
+    </section>
+    
+    <section class="features" id="features">
+        <h2 class="section-title">What Makes Us Worth £1M+</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3 class="feature-title">Instant Voice Cloning</h3>
+                <p class="feature-desc">Replicate any voice with just 30 seconds of sample audio. Our AI captures nuances most systems miss.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎚️</div>
+                <h3 class="feature-title">Real-time Pitch Control</h3>
+                <p class="feature-desc">Adjust vocal pitch seamlessly without artifacts. Go from bass to soprano while preserving natural tone.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎭</div>
+                <h3 class="feature-title">Emotion Modulation</h3>
+                <p class="feature-desc">Add or remove emotional inflections while maintaining speech clarity. Perfect for voice acting.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔊</div>
+                <h3 class="feature-title">Studio-grade Quality</h3>
+                <p class="feature-desc">Professional-grade audio processing that eliminates background noise while enhancing vocal clarity.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎥</div>
+                <h3 class="feature-title">Video Integration</h3>
+                <p class="feature-desc">Sync modified audio with video while maintaining perfect lip sync and natural facial movements.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔄</div>
+                <h3 class="feature-title">Batch Processing</h3>
+                <p class="feature-desc">Process thousands of audio files simultaneously with our cloud-based infrastructure.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="demo-section" id="demo">
+        <h2 class="section-title">Experience The Magic</h2>
+        <div class="demo-container">
+            <p>Try our real-time voice transformation demo below. Record your voice or upload an audio file to hear the magic.</p>
+            
+            <div class="controls">
+                <button class="control-button" id="recordBtn">Record</button>
+                <button class="control-button" id="uploadBtn">Upload</button>
+                <button class="control-button" id="sampleBtn">Sample</button>
+            </div>
+            
+            <div class="audio-visualizer">
+                <div class="visualizer-bars" id="visualizer">
+                    <!-- Bars will be generated by JS -->
+                </div>
+            </div>
+            
+            <div class="controls">
+                <button class="control-button" id="playBtn">Play</button>
+                <button class="control-button" id="stopBtn">Stop</button>
+                <button class="control-button" id="cloneBtn">Clone Voice</button>
+                <button class="control-button" id="downloadBtn">Download</button>
+            </div>
+            
+            <div class="slider-container">
+                <label class="slider-label" for="pitchSlider">Pitch Adjustment</label>
+                <input type="range" min="-12" max="12" value="0" class="slider" id="pitchSlider">
+            </div>
+            
+            <div class="slider-container">
+                <label class="slider-label" for="speedSlider">Speed Adjustment</label>
+                <input type="range" min="50" max="200" value="100" class="slider" id="speedSlider">
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="footer-logo">Dan's AI</div>
+        <div>Created by Daniel Adyebo (CEO)</div>
+        
+        <div class="social-links">
+            <a href="#" class="social-link">📱</a>
+            <a href="#" class="social-link">🐦</a>
+            <a href="#" class="social-link">📘</a>
+            <a href="#" class="social-link">📸</a>
+            <a href="#" class="social-link">🎬</a>
+        </div>
+        
+        <div>© 2026 Dan's AI. Worth £1M+ in today's market.</div>
+        <div class="copyright">Voice cloning and pitch shifting technology powered by proprietary neural networks.</div>
+    </footer>
+    
+    <script>
+        // Simple audio visualizer demo
+        document.addEventListener('DOMContentLoaded', function() {
+            const visualizer = document.getElementById('visualizer');
+            const pitchSlider = document.getElementById('pitchSlider');
+            const speedSlider = document.getElementById('speedSlider');
+            
+            // Create visualizer bars
+            for (let i = 0; i < 50; i++) {
+                const bar = document.createElement('div');
+                bar.className = 'visualizer-bar';
+                visualizer.appendChild(bar);
+            }
+            
+            // Animate bars randomly for demo purposes
+            const bars = document.querySelectorAll('.visualizer-bar');
+            setInterval(() => {
+                bars.forEach(bar => {
+                    bar.style.height = `${Math.random() * 100}%`;
+                    bar.style.backgroundColor = `rgba(76, 201, 240, ${Math.random() * 0.7 + 0.3})`;
+                });
+            }, 100);
+            
+            // Demo buttons functionality
+            document.getElementById('recordBtn').addEventListener('click', () => {
+                alert('Recording functionality would be implemented here');
+            });
+            
+            document.getElementById('uploadBtn').addEventListener('click', () => {
+                alert('Audio upload would be implemented here');
+            });
+            
+            document.getElementById('sampleBtn').addEventListener('click', () => {
+                alert('Sample audio would be loaded here');
+            });
+            
+            document.getElementById('playBtn').addEventListener('click', () => {
+                alert('Audio playback would start here');
+            });
+            
+            document.getElementById('stopBtn').addEventListener('click', () => {
+                alert('Audio playback would stop here');
+            });
+            
+            document.getElementById('cloneBtn').addEventListener('click', () => {
+                alert('Voice cloning would be initiated here');
+            });
+            
+            document.getElementById('downloadBtn').addEventListener('click', () => {
+                alert('Processed audio would be downloaded here');
+            });
+            
+            // Slider value displays
+            pitchSlider.addEventListener('input', () => {
+                alert(`Pitch adjusted by ${pitchSlider.value} semitones`);
+            });
+            
+            speedSlider.addEventListener('input', () => {
+                alert(`Speed adjusted to ${speedSlider.value}%`);
+            });
+        });
+    </script>
+</body>
+</html>
